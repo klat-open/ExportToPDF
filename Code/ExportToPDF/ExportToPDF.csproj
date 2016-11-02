@@ -16,7 +16,7 @@
     <RootNamespace>ExportToPDF</RootNamespace>
     <AssemblyName>ExportToPDF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -196,17 +196,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Reports\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Content>
-    <None Include="Reports\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Reports\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -245,8 +234,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="Uploads\a.htm" />
-    <Content Include="Uploads\test.css" />
+    <Content Include="Reports\Report5.html" />
+    <Content Include="Reports\Report3.html" />
+    <Content Include="Reports\Report4.html" />
+    <Content Include="Reports\Report2.html" />
+    <Content Include="Reports\Report1.html" />
+    <Content Include="Reports\report.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -399,11 +392,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Report1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -429,9 +417,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reports\Report1.rdlc" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -448,7 +434,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>39444</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:39444/</IISUrl>
+          <IISUrl>http://localhost/ExportToPDF</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
