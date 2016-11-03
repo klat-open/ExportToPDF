@@ -12,7 +12,7 @@ using iTextSharp.tool.xml;
 using iTextSharp.tool.xml.pipeline.html;
 using System.Text;
 
-namespace ExportToPDF
+namespace Klat.Example
 {
     public partial class _Default : Page
     {
@@ -106,7 +106,7 @@ namespace ExportToPDF
                 // cellRow2.BackgroundColor = green;
                 cellRow2.Colspan = 15;
                 cellRow2.HorizontalAlignment = PdfPCell.ALIGN_CENTER; // 0=Left, 1=Centre, 2=Right
-                cellRow2.VerticalAlignment = PdfPCell.ALIGN_CENTER;
+                cellRow2.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
 
                 table.AddCell(cellRow2);
 
@@ -114,94 +114,109 @@ namespace ExportToPDF
                 PdfPCell r3c1 = new PdfPCell(new Phrase("TT", reportHeaderColumnFont));
                 r3c1.BackgroundColor = green;
                 r3c1.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c1.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c1);
 
                 PdfPCell r3c2 = new PdfPCell(new Phrase("Loại KH", reportHeaderColumnFont));
                 r3c2.BackgroundColor = green;
                 r3c2.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c2.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c2);
 
                 PdfPCell r3c3 = new PdfPCell(new Phrase("Nhóm", reportHeaderColumnFont));
                 r3c3.BackgroundColor = green;
                 r3c3.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c3.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c3);
 
                 PdfPCell r3c4 = new PdfPCell(new Phrase("CIF", reportHeaderColumnFont));
                 r3c4.BackgroundColor = green;
                 r3c4.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c4.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c4);
 
                 PdfPCell r3c5 = new PdfPCell(new Phrase("Tên KH", reportHeaderColumnFont));
                 r3c5.BackgroundColor = green;
                 r3c5.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c5.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c5);
 
                 PdfPCell r3c6 = new PdfPCell(new Phrase("Hạng khách hàng", reportHeaderColumnFont));
                 r3c6.BackgroundColor = green;
                 r3c6.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c6.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c6);
 
                 PdfPCell r3c7 = new PdfPCell(new Phrase("Ngành nghề", reportHeaderColumnFont));
                 r3c7.BackgroundColor = green;
                 r3c7.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c7.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c7);
 
                 PdfPCell r3c8 = new PdfPCell(new Phrase("Khu vực", reportHeaderColumnFont));
                 r3c8.BackgroundColor = green;
                 r3c8.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c8.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c8);
 
                 PdfPCell r3c9 = new PdfPCell(new Phrase("Chi nhánh", reportHeaderColumnFont));
                 r3c9.BackgroundColor = green;
                 r3c9.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c9.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c9);
 
                 PdfPCell r3c10 = new PdfPCell(new Phrase("Cán bộ quản lý", reportHeaderColumnFont));
                 r3c10.BackgroundColor = green;
                 r3c10.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c10.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c10);
 
                 PdfPCell r3c11 = new PdfPCell(new Phrase("Ngày lập báo cáo", reportHeaderColumnFont));
                 r3c11.BackgroundColor = green;
                 r3c11.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c11.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c11);
 
                 PdfPCell r3c12 = new PdfPCell(new Phrase("Người lập báo cáo", reportHeaderColumnFont));
                 r3c12.BackgroundColor = green;
                 r3c12.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c12.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c12);
 
                 PdfPCell r3c13 = new PdfPCell(new Phrase("Cấp cần báo cáo", reportHeaderColumnFont));
                 r3c13.BackgroundColor = green;
                 r3c13.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c13.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c13);
 
                 PdfPCell r3c14 = new PdfPCell(new Phrase("Thành phần tham dự của khách hàng", reportHeaderColumnFont));
                 r3c14.BackgroundColor = green;
                 r3c14.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c14.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c14);
 
                 PdfPCell r3c15 = new PdfPCell(new Phrase("Chủ đề gặp", reportHeaderColumnFont));
                 r3c15.BackgroundColor = green;
                 r3c15.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                r3c15.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 table.AddCell(r3c15);
 
                 // row 4
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
-                addCell(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
+                AddCellInternal(table, "Tổng hợp nội dung báo cáo trong ngày của công ty.", bodyFont);
 
                 document.Add(table);
 
@@ -215,7 +230,7 @@ namespace ExportToPDF
             // Response.WriteFile(MapPath("~/Uploads/a.pdf"));
         }
 
-        private PdfPCell addCell(PdfPTable table, string text = null, Font font = null, BaseColor bgColor = null)
+        private PdfPCell AddCellInternal(PdfPTable table, string text = null, Font font = null, int colspan = 1, BaseColor bgColor = null)
         {
             PdfPCell cell;
             if (font == null)
@@ -227,13 +242,20 @@ namespace ExportToPDF
                 cell = new PdfPCell(new Phrase(text, font));
             }
 
+            if (colspan > 1)
+            {
+                cell.Colspan = colspan;
+            }
+
 
             if (bgColor != null)
             {
                 cell.BackgroundColor = bgColor;
             }
 
-            cell.HorizontalAlignment = 1;
+            cell.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+            cell.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
+            cell.PaddingBottom = 10f;
             table.AddCell(cell);
 
             return cell;

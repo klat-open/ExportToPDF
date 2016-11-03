@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExportToPDF {
+namespace Klat.Example {
     
     
     public partial class _Default {

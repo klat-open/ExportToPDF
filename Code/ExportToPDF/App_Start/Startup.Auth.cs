@@ -7,9 +7,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using ExportToPDF.Models;
+using Klat.Example.Models;
 
-namespace ExportToPDF
+namespace Klat.Example
 {
     public partial class Startup {
 
