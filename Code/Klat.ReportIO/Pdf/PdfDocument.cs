@@ -76,8 +76,7 @@ namespace Klat.ReportIO.Pdf
         {
             string defaultFontPath = FontUtils.GetFontPath(ReportFactory.FontList, ReportFactory.FontStyle);
             iTextSharp.text.FontFactory.Register(defaultFontPath);
-
-            byte[] data;
+            
             using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
             {
                 PageSize currentPageSize = PageSize ?? ReportFactory.PageSize;
