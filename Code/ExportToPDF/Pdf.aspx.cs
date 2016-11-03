@@ -29,6 +29,11 @@ namespace Klat.Example
             TableCell cell11 = row1.NewCell();
             cell11.Value = "Tiêu đề báo cáo";
             cell11.HorizontalAlignment = HorizontalAlignment.Center;
+            cell11.Colspan = 2;
+
+            TableCell cell21 = row1.NewCell();
+            cell21.Value = "Tiêu đề báo cáo 2";
+            cell21.HorizontalAlignment = HorizontalAlignment.Left;
 
 
             TableRow row2 = table.NewRow();
@@ -44,6 +49,15 @@ namespace Klat.Example
             p1.AddText(textBold);
 
             document.AddParagraph(p1);
+
+            Paragraph p2 = new Paragraph("Hướng dẫn sử dụng thư viện xuất ra tệp PDF.");
+            p2.PaddingBottom = 10f;
+
+            Text textBold2 = new Text(" Bold");
+            textBold2.Style = FontStyle.Bold;
+            p2.AddText(textBold);
+
+            document.AddParagraph(p2);
 
             document.InsertFromExcel(MapPath("~/Uploads/data_empty.xlsx"));
             document.InsertFromExcel(MapPath("~/Uploads/data.xlsx"));

@@ -36,6 +36,8 @@ namespace Klat.ReportIO.Pdf
 
         public FontStyle? Style { get; set; }
 
+        public float? PaddingBottom { get; set; }
+
         public Text CreateText()
         {
             Text text = new Text();
@@ -93,6 +95,12 @@ namespace Klat.ReportIO.Pdf
             if (paragraphSource.TextAlign.HasValue)
             {
                 paragraph.Alignment = paragraphSource.TextAlign.Value.ToITextSharpValue();
+            }
+
+            float? paddingBottom = paragraphSource.PaddingBottom ?? ReportFactory.ParagraphPaddingBottom;
+            if (paddingBottom.HasValue)
+            {
+                paragraph.SpacingAfter = paddingBottom.Value;
             }
 
             iTextSharp.text.Phrase phrase = new iTextSharp.text.Phrase();

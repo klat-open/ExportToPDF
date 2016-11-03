@@ -31,6 +31,14 @@ namespace Klat.ReportIO
 
         public static float MarginLeft { get; set; }
 
+        public static float? ParagraphPaddingTop { get; set; }
+
+        public static float? ParagraphPaddingRight { get; set; }
+
+        public static float? ParagraphPaddingBottom { get; set; }
+
+        public static float? ParagraphPaddingLeft { get; set; }
+
         public static float TableFontSize { get; set; }
 
         public static HorizontalAlignment TableHorizontalAlignment { get; set; }
@@ -60,6 +68,10 @@ namespace Klat.ReportIO
             MarginRight = 30;
             MarginBottom = 30;
             MarginLeft = 30;
+            ParagraphPaddingTop = null;
+            ParagraphPaddingRight = null;
+            ParagraphPaddingBottom = null;
+            ParagraphPaddingLeft = null;
             TableFontSize = 13f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
@@ -83,6 +95,10 @@ namespace Klat.ReportIO
             MarginRight = 30;
             MarginBottom = 30;
             MarginLeft = 30;
+            ParagraphPaddingTop = null;
+            ParagraphPaddingRight = null;
+            ParagraphPaddingBottom = null;
+            ParagraphPaddingLeft = null;
             TableFontSize = 9f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;

@@ -104,21 +104,26 @@ namespace Klat.ReportIO.Pdf
             iTextSharp.text.pdf.PdfPCell cell;
             foreach (TableRow row in tableSource.Rows)
             {
-                int columnLengthWithRow = 0;
-                for (int i = 0; i < row.Cells.Count; i++)
+                int columnIndex = 1;
+                while (true)
                 {
-                    TableCell cellSource = row.Cells[i];
-                    if (columnLengthWithRow + cellSource.Colspan > columnLength)
+                    if (columnIndex > row.Cells.Count)
                     {
                         break;
                     }
 
-                    columnLengthWithRow += cellSource.Colspan ?? ReportFactory.TableCellColspan;
+                    TableCell cellSource = row.Cells[columnIndex - 1];
+                    if (columnIndex + cellSource.Colspan - 1 > columnLength)
+                    {
+                        break;
+                    }
+
                     cell = cellSource;
                     table.AddCell(cell);
+                    columnIndex += cellSource.Colspan ?? 1;
                 }
 
-                for (int i = columnLengthWithRow; i < columnLength; i++)
+                for (int i = columnIndex - 1; i < columnLength; i++)
                 {
                     cell = row.NewCell();
                     table.AddCell(cell);
