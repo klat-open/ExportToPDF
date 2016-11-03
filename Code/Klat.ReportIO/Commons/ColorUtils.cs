@@ -12,7 +12,7 @@ namespace Klat.ReportIO.Commons
             {
                 return null;
             }
-            
+
             if (rgb.StartsWith("#"))
             {
                 rgb = rgb.Substring(1);
@@ -28,10 +28,27 @@ namespace Klat.ReportIO.Commons
             return ToReportColorByRgb(excelColor.Rgb);
         }
 
-        public static ReportColor GetTextColor(this ExcelRange excelRange)
+        public static ReportColor GetTextColor(this ExcelRange excelRange, ExcelRange motherRange = null)
         {
-            string rgb = string.IsNullOrEmpty(excelRange.Style.Font.Color.Rgb) ? excelRange.Style.Font.Color.LookupColor(excelRange.Style.Font.Color) : excelRange.Style.Font.Color.Rgb;
-            
+            // string rgb = string.IsNullOrEmpty(excelRange.Style.Font.Color.Rgb) ? excelRange.Style.Font.Color.LookupColor() : excelRange.Style.Font.Color.Rgb;
+            string rgb;
+            if (string.IsNullOrEmpty(excelRange.Style.Font.Color.Rgb))
+            {
+                if (motherRange == null)
+                {
+                    rgb = null;
+                }
+                else
+                {
+                    //rgb = excelRange.Style.Font.Color.LookupColor(motherRange.Style.Font.Color);
+                    rgb = motherRange.Style.Font.Color.LookupColor(excelRange.Style.Font.Color);
+                }
+            }
+            else
+            {
+                rgb = excelRange.Style.Font.Color.Rgb;
+            }
+
             return ToReportColorByRgb(rgb);
         }
     }

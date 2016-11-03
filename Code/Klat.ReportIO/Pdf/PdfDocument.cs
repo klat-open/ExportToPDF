@@ -71,10 +71,14 @@ namespace Klat.ReportIO.Pdf
                 foreach (ExcelWorksheet sheet in worksheets)
                 {
                     ExcelAddressBase activeRange = sheet.Dimension;
+
                     if (activeRange != null)
                     {
                         int columnLength = activeRange.Columns;
                         int rowLength = activeRange.Rows;
+
+                        ExcelRange cells = sheet.Cells[activeRange.Start.Row, activeRange.Start.Column, activeRange.End.Row, activeRange.End.Column];
+                        ExcelStyle fullStyle = cells.Style;
 
                         Table table = Table.Create(columnLength);
                         // Duyệt từng dòng.
@@ -97,7 +101,9 @@ namespace Klat.ReportIO.Pdf
                                 tableCell.Rowspan = rowspan;
 
                                 // tableCell.BackgoundColor = cell.Style.Fill.BackgroundColor.ToReportColorByExcelColor();
-                                var fill = cell.Style.Fill;
+                                var style = cell.Style;
+                                var fill = style.Fill;
+                                var font = style.Font;
 
                                 string rgbForbackgound; // See more: http://stackoverflow.com/questions/35941241/epplus-get-correct-cell-background-rgb-color
                                 if (fill.PatternType == ExcelFillStyle.Solid)
@@ -116,28 +122,61 @@ namespace Klat.ReportIO.Pdf
                                 if (!string.IsNullOrEmpty(rgbForbackgound))
                                 {
                                     tableCell.BackgoundColor = rgbForbackgound.ToReportColorByRgb();
+
+                                    if (string.IsNullOrEmpty(text))
+                                    {
+                                        text = "Xin chao";
+                                    }
                                 }
 
                                 if (!string.IsNullOrEmpty(text))
                                 {
-                                    if (cell.Style.Font.Bold && cell.Style.Font.Italic)
+                                    if (font.Bold && font.Italic)
                                     {
                                         tableCell.Style = FontStyle.BoldItalic;
                                     }
-                                    else if (cell.Style.Font.Bold)
+                                    else if (font.Bold)
                                     {
                                         tableCell.Style = FontStyle.Bold;
                                     }
-                                    else if (cell.Style.Font.Italic)
+                                    else if (font.Italic)
                                     {
                                         tableCell.Style = FontStyle.Italic;
                                     }
 
-                                    tableCell.FontSize = cell.Style.Font.Size;
+                                    tableCell.FontSize = font.Size;
 
                                     // align
-                                    tableCell.HorizontalAlignment = cell.Style.HorizontalAlignment.ToHorizontalAlignment();
-                                    tableCell.VerticalAlignment = cell.Style.VerticalAlignment.ToVerticalAlignment();
+                                    tableCell.HorizontalAlignment = style.HorizontalAlignment.ToHorizontalAlignment();
+                                    tableCell.VerticalAlignment = style.VerticalAlignment.ToVerticalAlignment();
+
+                                    // merge cell
+                                    if (cell.Merge)
+                                    {
+                                        // string columnSpan = cell.Table.ColumnSpan;
+                                    }
+
+                                    // border
+                                    if (style.Border.Top.Style == ExcelBorderStyle.None)
+                                    {
+
+                                    }
+
+                                    if (style.Border.Right.Style == ExcelBorderStyle.None)
+                                    {
+
+                                    }
+
+                                    if (style.Border.Bottom.Style == ExcelBorderStyle.None)
+                                    {
+
+                                    }
+
+                                    if (style.Border.Left.Style == ExcelBorderStyle.None)
+                                    {
+
+                                    }
+
 
                                     if (cell.IsRichText)
                                     {
@@ -147,7 +186,7 @@ namespace Klat.ReportIO.Pdf
                                     }
                                     else
                                     {
-                                        tableCell.TextColor = cell.GetTextColor();
+                                        // tableCell.TextColor = cell.GetTextColor(cells);
                                     }
                                 }
 

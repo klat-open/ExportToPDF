@@ -108,7 +108,7 @@ namespace Klat.ReportIO.Pdf
                 for (int i = 0; i < row.Cells.Count; i++)
                 {
                     TableCell cellSource = row.Cells[i];
-                    if (columnLengthWithRow + cellSource.Colspan >= columnLength)
+                    if (columnLengthWithRow + cellSource.Colspan > columnLength)
                     {
                         break;
                     }
