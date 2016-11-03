@@ -53,8 +53,11 @@
     <Compile Include="Commons\PageSizeUtils.cs" />
     <Compile Include="Enums\FontList.cs" />
     <Compile Include="Enums\FontStyle.cs" />
+    <Compile Include="Enums\PageOrientation.cs" />
     <Compile Include="Enums\PageSize.cs" />
+    <Compile Include="Enums\TextAlignment.cs" />
     <Compile Include="Pdf\Paragraph.cs" />
+    <Compile Include="Pdf\Text.cs" />
     <Compile Include="ReportColor.cs" />
     <Compile Include="Enums\HorizontalAlignment.cs" />
     <Compile Include="Enums\VerticalAlignment.cs" />

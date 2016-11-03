@@ -11,6 +11,8 @@ namespace Klat.ReportIO
 
         public static PageSize PageSize { get; set; }
 
+        public static PageOrientation PageOrientation { get; set; }
+
         public static FontList FontList { get; set; }
 
         public static int FontSize { get; set; }
@@ -21,13 +23,13 @@ namespace Klat.ReportIO
 
         public static ReportColor BackgoundColor { get; set; }
 
-        public static int MarginTop { get; set; }
+        public static float MarginTop { get; set; }
 
-        public static int MarginRight { get; set; }
+        public static float MarginRight { get; set; }
 
-        public static int MarginBottom { get; set; }
+        public static float MarginBottom { get; set; }
 
-        public static int MarginLeft { get; set; }
+        public static float MarginLeft { get; set; }
 
         public static int TableFontSize { get; set; }
 
@@ -48,6 +50,7 @@ namespace Klat.ReportIO
         public static void Reset()
         {
             PageSize = PageSize.A4;
+            PageOrientation = PageOrientation.Portrait;
             FontList = FontList.TimesNewRoman;
             FontSize = 13;
             FontStyle = FontStyle.Regular;
@@ -56,7 +59,7 @@ namespace Klat.ReportIO
             MarginTop = 30;
             MarginRight = 30;
             MarginBottom = 30;
-            MarginTop = 30;
+            MarginLeft = 30;
             TableFontSize = 13;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
@@ -70,6 +73,7 @@ namespace Klat.ReportIO
         public static void SetStyle1ForPDF()
         {
             PageSize = PageSize.A4;
+            PageOrientation = PageOrientation.Portrait;
             FontList = FontList.TimesNewRoman;
             FontSize = 9;
             FontStyle = FontStyle.Regular;
@@ -78,7 +82,7 @@ namespace Klat.ReportIO
             MarginTop = 30;
             MarginRight = 30;
             MarginBottom = 30;
-            MarginTop = 30;
+            MarginLeft = 30;
             TableFontSize = 9;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
