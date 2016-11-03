@@ -119,6 +119,7 @@ namespace Klat.ReportIO.Pdf
                     }
 
                     cell = cellSource;
+                    
                     table.AddCell(cell);
                     columnIndex += cellSource.Colspan ?? 1;
                 }

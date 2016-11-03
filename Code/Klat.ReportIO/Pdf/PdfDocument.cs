@@ -122,14 +122,17 @@ namespace Klat.ReportIO.Pdf
                                 if (!string.IsNullOrEmpty(rgbForbackgound))
                                 {
                                     tableCell.BackgoundColor = rgbForbackgound.ToReportColorByRgb();
-
-                                    if (string.IsNullOrEmpty(text))
-                                    {
-                                        text = "Xin chao";
-                                    }
                                 }
 
-                                if (!string.IsNullOrEmpty(text))
+                                if (string.IsNullOrEmpty(text))
+                                {
+                                    // Gán cell đầu tiên của hàng là 1 space để nếu hàng có tất cả các cell empty thì in ra PDF vẫn có hàng đó (mặc định không hiển thị).
+                                    if (j == 1)
+                                    {
+                                        tableCell.Value = " ";
+                                    }
+                                }
+                                else
                                 {
                                     if (font.Bold && font.Italic)
                                     {
@@ -186,7 +189,7 @@ namespace Klat.ReportIO.Pdf
                                     }
                                     else
                                     {
-                                        // tableCell.TextColor = cell.GetTextColor(cells);
+                                        tableCell.TextColor = cell.GetTextColor(cells);
                                     }
                                 }
 
