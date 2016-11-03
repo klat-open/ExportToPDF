@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\AlignmentUtils.cs" />
     <Compile Include="Commons\ColorUtils.cs" />
     <Compile Include="Commons\ConvertUtils.cs" />
     <Compile Include="Commons\FontUtils.cs" />

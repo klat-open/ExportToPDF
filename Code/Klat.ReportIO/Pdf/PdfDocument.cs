@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OfficeOpenXml.Style;
 
 namespace Klat.ReportIO.Pdf
 {
@@ -95,7 +96,28 @@ namespace Klat.ReportIO.Pdf
                                 tableCell.Colspan = colspan;
                                 tableCell.Rowspan = rowspan;
 
-                                tableCell.BackgoundColor = cell.Style.Fill.BackgroundColor.ToReportColor();
+                                // tableCell.BackgoundColor = cell.Style.Fill.BackgroundColor.ToReportColorByExcelColor();
+                                var fill = cell.Style.Fill;
+
+                                string rgbForbackgound; // See more: http://stackoverflow.com/questions/35941241/epplus-get-correct-cell-background-rgb-color
+                                if (fill.PatternType == ExcelFillStyle.Solid)
+                                {
+                                    rgbForbackgound = !string.IsNullOrEmpty(fill.BackgroundColor.Rgb) ? fill.BackgroundColor.Rgb : fill.PatternColor.LookupColor(fill.BackgroundColor);
+                                }
+                                else if (fill.PatternType != ExcelFillStyle.None)
+                                {
+                                    rgbForbackgound = !string.IsNullOrEmpty(fill.PatternColor.Rgb) ? fill.PatternColor.Rgb : fill.PatternColor.LookupColor(fill.PatternColor);
+                                }
+                                else
+                                {
+                                    rgbForbackgound = null;
+                                }
+
+                                if (!string.IsNullOrEmpty(rgbForbackgound))
+                                {
+                                    tableCell.BackgoundColor = rgbForbackgound.ToReportColorByRgb();
+                                }
+
                                 if (!string.IsNullOrEmpty(text))
                                 {
                                     if (cell.Style.Font.Bold && cell.Style.Font.Italic)
@@ -111,17 +133,20 @@ namespace Klat.ReportIO.Pdf
                                         tableCell.Style = FontStyle.Italic;
                                     }
 
-                                    //if (cell.RichText.Any())
-                                    //{
-                                    //    tableCell.TextColor = cell.Style.Font.Color.ToReportColor();
+                                    // align
+                                    tableCell.HorizontalAlignment = cell.Style.HorizontalAlignment.ToHorizontalAlignment();
+                                    tableCell.VerticalAlignment = cell.Style.VerticalAlignment.ToVerticalAlignment();
 
-                                    //    // tableCell.TextColor = (ReportColor)cell.RichText.First().Color;
-                                    //    // tableCell.TextColor = ReportColor.While;
-                                    //}
-                                    //else
-                                    //{
-                                    //    tableCell.TextColor = cell.Style.Font.Color.ToReportColor();
-                                    //}
+                                    if (cell.IsRichText)
+                                    {
+                                        ExcelRichTextCollection richTextCollection = cell.RichText;
+                                        // var dictionaryTextToColour = richTextCollection.ToDictionary(rt => rt.Text, rt => rt.Color); //NOT recommended to use a dictionary here
+
+                                    }
+                                    else
+                                    {
+                                        tableCell.TextColor = cell.GetTextColor();
+                                    }
                                 }
 
                                 j = j + colspan - 1;
