@@ -15,7 +15,7 @@ namespace Klat.ReportIO
 
         public static FontList FontList { get; set; }
 
-        public static int FontSize { get; set; }
+        public static float FontSize { get; set; }
 
         public static FontStyle FontStyle { get; set; }
 
@@ -31,7 +31,7 @@ namespace Klat.ReportIO
 
         public static float MarginLeft { get; set; }
 
-        public static int TableFontSize { get; set; }
+        public static float TableFontSize { get; set; }
 
         public static HorizontalAlignment TableHorizontalAlignment { get; set; }
 
@@ -52,7 +52,7 @@ namespace Klat.ReportIO
             PageSize = PageSize.A4;
             PageOrientation = PageOrientation.Portrait;
             FontList = FontList.TimesNewRoman;
-            FontSize = 13;
+            FontSize = 13f;
             FontStyle = FontStyle.Regular;
             TextColor = ReportColor.Black;
             BackgoundColor = ReportColor.While;
@@ -60,7 +60,7 @@ namespace Klat.ReportIO
             MarginRight = 30;
             MarginBottom = 30;
             MarginLeft = 30;
-            TableFontSize = 13;
+            TableFontSize = 13f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
             TableCellColspan = 1;
@@ -75,7 +75,7 @@ namespace Klat.ReportIO
             PageSize = PageSize.A4;
             PageOrientation = PageOrientation.Portrait;
             FontList = FontList.TimesNewRoman;
-            FontSize = 9;
+            FontSize = 13f;
             FontStyle = FontStyle.Regular;
             TextColor = ReportColor.Black;
             BackgoundColor = ReportColor.While;
@@ -83,7 +83,7 @@ namespace Klat.ReportIO
             MarginRight = 30;
             MarginBottom = 30;
             MarginLeft = 30;
-            TableFontSize = 9;
+            TableFontSize = 9f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
             TableCellColspan = 1;

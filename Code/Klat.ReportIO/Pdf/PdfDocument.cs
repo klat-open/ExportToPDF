@@ -133,6 +133,8 @@ namespace Klat.ReportIO.Pdf
                                         tableCell.Style = FontStyle.Italic;
                                     }
 
+                                    tableCell.FontSize = cell.Style.Font.Size;
+
                                     // align
                                     tableCell.HorizontalAlignment = cell.Style.HorizontalAlignment.ToHorizontalAlignment();
                                     tableCell.VerticalAlignment = cell.Style.VerticalAlignment.ToVerticalAlignment();

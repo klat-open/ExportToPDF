@@ -34,7 +34,7 @@ namespace Klat.ReportIO.Pdf
         public static implicit operator iTextSharp.text.Chunk(Text textSource)
         {
             FontList fontList = textSource.FontList ?? ReportFactory.FontList;
-            int fontSize = textSource.FontSize ?? ReportFactory.FontSize;
+            float fontSize = textSource.FontSize ?? ReportFactory.FontSize;
             ReportColor textColor = textSource.TextColor ?? ReportFactory.TextColor;
             FontStyle style = textSource.Style ?? ReportFactory.FontStyle;
             ReportFont font = ReportFont.Create(fontList, fontSize, textColor, style);

@@ -19,7 +19,7 @@ namespace Klat.ReportIO.Pdf
 
         public FontList? FontList { get; set; }
 
-        public int? FontSize { get; set; }
+        public float? FontSize { get; set; }
 
         public ReportColor TextColor { get; set; }
 
@@ -61,7 +61,7 @@ namespace Klat.ReportIO.Pdf
             {
                 Phrase phrase;
                 FontList fontList = cellSource.FontList ?? ReportFactory.FontList;
-                int fontSize = cellSource.FontSize ?? ReportFactory.FontSize;
+                float fontSize = cellSource.FontSize ?? ReportFactory.FontSize;
                 ReportColor textColor = cellSource.TextColor ?? ReportFactory.TextColor;
                 FontStyle style = cellSource.Style ?? ReportFactory.FontStyle;
                 ReportFont font = ReportFont.Create(fontList, fontSize, textColor, style);

@@ -13,7 +13,7 @@ namespace Klat.ReportIO
 
         public ReportColor Color { get; set; }
 
-        public int FontSize { get; set; }
+        public float FontSize { get; set; }
 
         public FontStyle Style { get; set; }
 
@@ -22,7 +22,7 @@ namespace Klat.ReportIO
             return new ReportFont();
         }
 
-        public static ReportFont Create(FontList fontList, int fontSize, ReportColor color, FontStyle style)
+        public static ReportFont Create(FontList fontList, float fontSize, ReportColor color, FontStyle style)
         {
             return new ReportFont
             {
