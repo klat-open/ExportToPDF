@@ -7,7 +7,10 @@ namespace Klat.ReportIO.Pdf
 {
     public class TableCell
     {
-        internal TableCell() { }
+        internal TableCell()
+        {
+            Border = new Border();
+        }
 
         public string Value { get; set; }
 
@@ -36,6 +39,8 @@ namespace Klat.ReportIO.Pdf
         public float? PaddingBottom { get; set; }
 
         public float? PaddingLeft { get; set; }
+
+        public Border Border { get; set; }
 
         public static TableCell Create()
         {
@@ -125,6 +130,27 @@ namespace Klat.ReportIO.Pdf
             if (paddingLeft.HasValue)
             {
                 cell.PaddingLeft = paddingLeft.Value;
+            }
+
+            // border
+            if (cellSource.Border.Top.Style == BorderStyle.None)
+            {
+                cell.BorderWidthTop = 0f;
+            }
+
+            if (cellSource.Border.Right.Style == BorderStyle.None)
+            {
+                cell.BorderWidthRight = 0f;
+            }
+
+            if (cellSource.Border.Bottom.Style == BorderStyle.None)
+            {
+                cell.BorderWidthBottom = 0f;
+            }
+
+            if (cellSource.Border.Left.Style == BorderStyle.None)
+            {
+                cell.BorderWidthLeft = 0f;
             }
 
             return cell;

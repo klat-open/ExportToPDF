@@ -119,9 +119,62 @@ namespace Klat.ReportIO.Pdf
                                     rgbForbackgound = null;
                                 }
 
+                                // border
+                                if (style.Border.Top.Style == ExcelBorderStyle.None)
+                                {
+                                    tableCell.Border.Top.Style = BorderStyle.None;
+                                }
+                                else
+                                {
+                                    tableCell.Border.Top.Style = BorderStyle.Solid;
+                                }
+
+                                if (style.Border.Right.Style == ExcelBorderStyle.None)
+                                {
+                                    tableCell.Border.Right.Style = BorderStyle.None;
+                                }
+                                else
+                                {
+                                    tableCell.Border.Right.Style = BorderStyle.Solid;
+                                }
+
+                                if (style.Border.Bottom.Style == ExcelBorderStyle.None)
+                                {
+                                    tableCell.Border.Bottom.Style = BorderStyle.None;
+                                }
+                                else
+                                {
+                                    tableCell.Border.Bottom.Style = BorderStyle.Solid;
+                                }
+
+                                if (style.Border.Left.Style == ExcelBorderStyle.None)
+                                {
+                                    tableCell.Border.Left.Style = BorderStyle.None;
+                                }
+                                else
+                                {
+                                    tableCell.Border.Left.Style = BorderStyle.Solid;
+                                }
+
+                                if (cell.IsRichText)
+                                {
+                                    ExcelRichTextCollection richTextCollection = cell.RichText;
+                                    // var dictionaryTextToColour = richTextCollection.ToDictionary(rt => rt.Text, rt => rt.Color); //NOT recommended to use a dictionary here
+                                }
+                                else
+                                {
+                                    tableCell.TextColor = cell.GetTextColor(cells);
+                                }
+
                                 if (!string.IsNullOrEmpty(rgbForbackgound))
                                 {
                                     tableCell.BackgoundColor = rgbForbackgound.ToReportColorByRgb();
+                                }
+
+                                // merge cell
+                                if (cell.Merge)
+                                {
+                                    // string columnSpan = cell.Table.ColumnSpan;
                                 }
 
                                 if (string.IsNullOrEmpty(text))
@@ -152,45 +205,6 @@ namespace Klat.ReportIO.Pdf
                                     // align
                                     tableCell.HorizontalAlignment = style.HorizontalAlignment.ToHorizontalAlignment();
                                     tableCell.VerticalAlignment = style.VerticalAlignment.ToVerticalAlignment();
-
-                                    // merge cell
-                                    if (cell.Merge)
-                                    {
-                                        // string columnSpan = cell.Table.ColumnSpan;
-                                    }
-
-                                    // border
-                                    if (style.Border.Top.Style == ExcelBorderStyle.None)
-                                    {
-
-                                    }
-
-                                    if (style.Border.Right.Style == ExcelBorderStyle.None)
-                                    {
-
-                                    }
-
-                                    if (style.Border.Bottom.Style == ExcelBorderStyle.None)
-                                    {
-
-                                    }
-
-                                    if (style.Border.Left.Style == ExcelBorderStyle.None)
-                                    {
-
-                                    }
-
-
-                                    if (cell.IsRichText)
-                                    {
-                                        ExcelRichTextCollection richTextCollection = cell.RichText;
-                                        // var dictionaryTextToColour = richTextCollection.ToDictionary(rt => rt.Text, rt => rt.Color); //NOT recommended to use a dictionary here
-
-                                    }
-                                    else
-                                    {
-                                        tableCell.TextColor = cell.GetTextColor(cells);
-                                    }
                                 }
 
                                 j = j + colspan - 1;

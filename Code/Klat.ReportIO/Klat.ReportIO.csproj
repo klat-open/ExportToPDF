@@ -57,12 +57,15 @@
     <Compile Include="Commons\ConvertUtils.cs" />
     <Compile Include="Commons\FontUtils.cs" />
     <Compile Include="Commons\PageSizeUtils.cs" />
+    <Compile Include="Enums\BorderStyle.cs" />
     <Compile Include="Enums\FontList.cs" />
     <Compile Include="Enums\FontStyle.cs" />
     <Compile Include="Enums\PageOrientation.cs" />
     <Compile Include="Enums\PageSize.cs" />
     <Compile Include="Enums\TextAlignment.cs" />
     <Compile Include="Extensions\EPPlusExtensions.cs" />
+    <Compile Include="Pdf\Border.cs" />
+    <Compile Include="Pdf\BorderItem.cs" />
     <Compile Include="Pdf\Paragraph.cs" />
     <Compile Include="Pdf\Text.cs" />
     <Compile Include="ReportColor.cs" />
