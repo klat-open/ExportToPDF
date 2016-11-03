@@ -78,6 +78,42 @@ namespace Klat.ReportIO.Pdf
             iTextSharp.text.FontFactory.Register(defaultFontPath);
 
             byte[] data;
+            using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                PageSize currentPageSize = PageSize ?? ReportFactory.PageSize;
+
+                iTextSharp.text.Rectangle pageSize = PageSizeUtils.ToRectangle(currentPageSize);
+                using (var document = new iTextSharp.text.Document(pageSize, 10, 10, 10, 10))
+                {
+                    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, fileStream);
+                    document.Open();
+
+                    foreach (var paragraph in Paragraphs)
+                    {
+                        if (paragraph is Table)
+                        {
+                            iTextSharp.text.pdf.PdfPTable tableSource = paragraph as Table;
+                            document.Add(tableSource);
+                        }
+                        else if (paragraph is Paragraph)
+                        {
+
+                        }
+                    }
+
+                    document.Close();
+                }
+
+                fileStream.Close();
+            }
+        }
+
+        public void SaveByMemoryStream(string fileName)
+        {
+            string defaultFontPath = FontUtils.GetFontPath(ReportFactory.FontList, ReportFactory.FontStyle);
+            iTextSharp.text.FontFactory.Register(defaultFontPath);
+
+            byte[] data;
             using (var memoryStream = new MemoryStream())
             {
                 PageSize currentPageSize = PageSize ?? ReportFactory.PageSize;
