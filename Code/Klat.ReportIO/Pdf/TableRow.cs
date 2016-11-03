@@ -40,6 +40,11 @@ namespace Klat.ReportIO.Pdf
         public TableCell CreateCell()
         {
             TableCell cell = TableCell.Create();
+            if (BackgoundColor != null)
+            {
+                cell.BackgoundColor = BackgoundColor;
+            }
+
             if (FontList.HasValue)
             {
                 cell.FontList = FontList;
@@ -86,6 +91,7 @@ namespace Klat.ReportIO.Pdf
         public TableCell NewCell()
         {
             TableCell cell = CreateCell();
+            AddCell(cell);
 
             return cell;
         }

@@ -11,7 +11,7 @@ namespace Klat.ReportIO.Pdf
     {
         internal Table()
         {
-
+            Rows = new List<TableRow>();
         }
 
         public int ColumnLenght { get; private set; }
@@ -32,7 +32,7 @@ namespace Klat.ReportIO.Pdf
 
         public List<TableRow> Rows { get; set; }
 
-        public Table Create(int columnLength)
+        public static Table Create(int columnLength)
         {
             return new Table { ColumnLenght = columnLength };
         }
@@ -40,22 +40,92 @@ namespace Klat.ReportIO.Pdf
         public TableRow CreateRow()
         {
             TableRow row = TableRow.Create();
+            if (BackgoundColor != null)
+            {
+                row.BackgoundColor = BackgoundColor;
+            }
+
+            if (FontList.HasValue)
+            {
+                row.FontList = FontList;
+            }
+
+            if (FontSize.HasValue)
+            {
+                row.FontSize = FontSize;
+            }
+
+            if (TextColor != null)
+            {
+                row.TextColor = TextColor;
+            }
+
+            if (Style.HasValue)
+            {
+                row.Style = Style;
+            }
+
+            if (HorizontalAlignment.HasValue)
+            {
+                row.HorizontalAlignment = HorizontalAlignment;
+            }
+
+            if (VerticalAlignment.HasValue)
+            {
+                row.VerticalAlignment = VerticalAlignment;
+            }
 
             return row;
-        }
-
-        public Table AppendRow(int columnLength = 1,
-            HorizontalAlignment alignDefault = HorizontalAlignment.Left,
-            VerticalAlignment valignDefault = VerticalAlignment.Top)
-        {
-            Table table = new Table(1, alignDefault, valignDefault);
-
-            return table;
         }
 
         public void AddRow(TableRow row)
         {
             Rows.Add(row);
+        }
+
+        public void AddRows(params TableRow[] rows)
+        {
+            Rows.AddRange(rows);
+        }
+
+        public TableRow NewRow()
+        {
+            TableRow row = CreateRow();
+            AddRow(row);
+
+            return row;
+        }
+
+        public static implicit operator iTextSharp.text.pdf.PdfPTable(Table tableSource)
+        {
+            int columnLength = tableSource.ColumnLenght;
+            iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(columnLength);
+            table.WidthPercentage = 100f;
+            iTextSharp.text.pdf.PdfPCell cell;
+            foreach (TableRow row in tableSource.Rows)
+            {
+                int columnLengthWithRow = 0;
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    TableCell cellSource = row.Cells[i];
+                    if (columnLengthWithRow + cellSource.Colspan >= columnLength)
+                    {
+                        break;
+                    }
+
+                    columnLengthWithRow += cellSource.Colspan ?? ReportFactory.TableCellColspan;
+                    cell = cellSource;
+                    table.AddCell(cell);
+                }
+
+                for (int i = columnLengthWithRow; i < columnLength; i++)
+                {
+                    cell = row.NewCell();
+                    table.AddCell(cell);
+                }
+            }
+
+            return table;
         }
     }
 }

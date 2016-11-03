@@ -54,6 +54,7 @@
     <Compile Include="Enums\FontList.cs" />
     <Compile Include="Enums\FontStyle.cs" />
     <Compile Include="Enums\PageSize.cs" />
+    <Compile Include="Pdf\Paragraph.cs" />
     <Compile Include="ReportColor.cs" />
     <Compile Include="Enums\HorizontalAlignment.cs" />
     <Compile Include="Enums\VerticalAlignment.cs" />

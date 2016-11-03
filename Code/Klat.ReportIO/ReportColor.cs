@@ -11,6 +11,8 @@ namespace Klat.ReportIO
 
         public static readonly ReportColor Black = ReportColor.Create("#000000");
 
+        public static readonly ReportColor Red = ReportColor.Create("#ff0000");
+
         private ReportColor() { }
 
         public Color Color { get; set; }
@@ -80,13 +82,13 @@ namespace Klat.ReportIO
 
         public static explicit operator ReportColor(BaseColor color)
         {
-            return ReportColor.Create(color);
+            return Create(color);
         }
 
 
         public static explicit operator ReportColor(string color)
         {
-            return ReportColor.Create(color);
+            return Create(color);
         }
 
 

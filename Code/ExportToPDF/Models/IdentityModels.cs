@@ -42,7 +42,7 @@ namespace Klat.Example.Models
 }
 
 #region Helpers
-namespace ExportToPDF
+namespace Klat.Example
 {
     public static class IdentityHelper
     {

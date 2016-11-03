@@ -1,7 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using Klat.Example;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Klat.Example.Startup))]
+[assembly: OwinStartupAttribute(typeof(Startup))]
 namespace Klat.Example
 {
     public partial class Startup {

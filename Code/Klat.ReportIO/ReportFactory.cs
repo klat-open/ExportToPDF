@@ -37,13 +37,13 @@ namespace Klat.ReportIO
 
         public static int TableCellColspan { get; set; }
 
-        public static int TableCellPaddingTop { get; set; }
+        public static float? TableCellPaddingTop { get; set; }
 
-        public static int TableCellPaddingRight { get; set; }
+        public static float? TableCellPaddingRight { get; set; }
 
-        public static int TableCellPaddingBottom { get; set; }
+        public static float? TableCellPaddingBottom { get; set; }
 
-        public static int TableCellPaddingLeft { get; set; }
+        public static float? TableCellPaddingLeft { get; set; }
 
         public static void Reset()
         {
@@ -61,17 +61,17 @@ namespace Klat.ReportIO
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
             TableCellColspan = 1;
-            TableCellPaddingTop = 0;
-            TableCellPaddingRight = 0;
-            TableCellPaddingBottom = 5;
-            TableCellPaddingLeft = 0;
+            TableCellPaddingTop = null;
+            TableCellPaddingRight = null;
+            TableCellPaddingBottom = null;
+            TableCellPaddingLeft = null;
         }
 
         public static void SetStyle1ForPDF()
         {
             PageSize = PageSize.A4;
             FontList = FontList.TimesNewRoman;
-            FontSize = 13;
+            FontSize = 9;
             FontStyle = FontStyle.Regular;
             TextColor = ReportColor.Black;
             BackgoundColor = ReportColor.While;
@@ -83,10 +83,10 @@ namespace Klat.ReportIO
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
             TableCellColspan = 1;
-            TableCellPaddingTop = 0;
-            TableCellPaddingRight = 0;
-            TableCellPaddingBottom = 5;
-            TableCellPaddingLeft = 0;
+            TableCellPaddingTop = null;
+            TableCellPaddingRight = null;
+            TableCellPaddingBottom = 5f;
+            TableCellPaddingLeft = null;
         }
     }
 }
