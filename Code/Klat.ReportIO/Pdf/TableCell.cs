@@ -1,6 +1,4 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Klat.ReportIO.Commons;
+﻿using Klat.ReportIO.Commons;
 using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
@@ -44,16 +42,16 @@ namespace Klat.ReportIO.Pdf
 
         public Border Border { get; set; }
 
-        public static implicit operator PdfPCell(TableCell cellSource)
+        public static implicit operator iTextSharp.text.pdf.PdfPCell(TableCell cellSource)
         {
-            PdfPCell cell;
+            iTextSharp.text.pdf.PdfPCell cell;
             if (string.IsNullOrEmpty(cellSource.Value))
             {
-                cell = new PdfPCell();
+                cell = new iTextSharp.text.pdf.PdfPCell();
             }
             else
             {
-                Phrase phrase;
+                iTextSharp.text.Phrase phrase;
                 FontList fontList = cellSource.FontList ?? ReportFactory.FontList;
                 float fontSize = cellSource.FontSize ?? ReportFactory.FontSize;
                 ReportColor textColor = cellSource.TextColor ?? ReportFactory.TextColor;
@@ -62,14 +60,14 @@ namespace Klat.ReportIO.Pdf
 
                 if (font == null)
                 {
-                    phrase = new Phrase(cellSource.Value);
+                    phrase = new iTextSharp.text.Phrase(cellSource.Value);
                 }
                 else
                 {
-                    phrase = new Phrase(cellSource.Value, font);
+                    phrase = new iTextSharp.text.Phrase(cellSource.Value, font);
                 }
 
-                cell = new PdfPCell(phrase);
+                cell = new iTextSharp.text.pdf.PdfPCell(phrase);
             }
 
             int? colspan = cellSource.Colspan;

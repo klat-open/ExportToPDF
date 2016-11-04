@@ -1,6 +1,4 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Klat.ReportIO.Enums;
+﻿using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Commons
 {
@@ -11,13 +9,13 @@ namespace Klat.ReportIO.Commons
             switch (align)
             {
                 case HorizontalAlignment.Left:
-                    return PdfPCell.ALIGN_LEFT;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_LEFT;
                 case HorizontalAlignment.Center:
-                    return PdfPCell.ALIGN_CENTER;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_CENTER;
                 case HorizontalAlignment.Right:
-                    return PdfPCell.ALIGN_RIGHT;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_RIGHT;
                 default:
-                    return PdfPCell.ALIGN_LEFT;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_LEFT;
             }
         }
 
@@ -26,13 +24,13 @@ namespace Klat.ReportIO.Commons
             switch (valign)
             {
                 case VerticalAlignment.Top:
-                    return PdfPCell.ALIGN_TOP;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_TOP;
                 case VerticalAlignment.Middle:
-                    return PdfPCell.ALIGN_MIDDLE;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_MIDDLE;
                 case VerticalAlignment.Bottom:
-                    return PdfPCell.ALIGN_BOTTOM;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_BOTTOM;
                 default:
-                    return PdfPCell.ALIGN_TOP;
+                    return iTextSharp.text.pdf.PdfPCell.ALIGN_TOP;
             }
         }
 
@@ -41,15 +39,15 @@ namespace Klat.ReportIO.Commons
             switch (alignment)
             {
                 case TextAlignment.Left:
-                    return Element.ALIGN_LEFT;
+                    return iTextSharp.text.Element.ALIGN_LEFT;
                 case TextAlignment.Center:
-                    return Element.ALIGN_CENTER;
+                    return iTextSharp.text.Element.ALIGN_CENTER;
                 case TextAlignment.Right:
-                    return Element.ALIGN_RIGHT;
+                    return iTextSharp.text.Element.ALIGN_RIGHT;
                 case TextAlignment.Justified:
-                    return Element.ALIGN_JUSTIFIED_ALL;
+                    return iTextSharp.text.Element.ALIGN_JUSTIFIED_ALL;
                 default:
-                    return Element.ALIGN_LEFT;
+                    return iTextSharp.text.Element.ALIGN_LEFT;
             }
         }
     }

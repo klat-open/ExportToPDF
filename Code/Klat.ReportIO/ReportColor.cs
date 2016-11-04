@@ -1,5 +1,4 @@
-﻿using iTextSharp.text;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Klat.ReportIO
 {
@@ -17,14 +16,14 @@ namespace Klat.ReportIO
 
         public Color Color { get; set; }
 
-        public static explicit operator ReportColor(BaseColor color)
+        public static explicit operator ReportColor(iTextSharp.text.BaseColor color)
         {
             return Create(color);
         }
 
-        public static implicit operator BaseColor(ReportColor color)
+        public static implicit operator iTextSharp.text.BaseColor(ReportColor color)
         {
-            return new BaseColor(color.Color);
+            return new iTextSharp.text.BaseColor(color.Color);
         }
 
         public static explicit operator ReportColor(string color)
@@ -64,7 +63,7 @@ namespace Klat.ReportIO
             };
         }
 
-        public static ReportColor Create(BaseColor color)
+        public static ReportColor Create(iTextSharp.text.BaseColor color)
         {
             return new ReportColor
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using Klat.ReportIO.Enums;
+﻿using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {

@@ -1,6 +1,4 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Klat.ReportIO.Commons;
+﻿using Klat.ReportIO.Commons;
 using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO
@@ -17,12 +15,12 @@ namespace Klat.ReportIO
 
         public FontStyle Style { get; set; }
 
-        public static implicit operator Font(ReportFont color)
+        public static implicit operator iTextSharp.text.Font(ReportFont color)
         {
             string fontPath = FontUtils.GetFontPath(color.FontList, color.Style);
             //BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-            BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Font font = new Font(bF, color.FontSize, Font.NORMAL, color.Color);
+            iTextSharp.text.pdf.BaseFont bF = iTextSharp.text.pdf.BaseFont.CreateFont(fontPath, iTextSharp.text.pdf.BaseFont.IDENTITY_H, iTextSharp.text.pdf.BaseFont.EMBEDDED);
+            iTextSharp.text.Font font = new iTextSharp.text.Font(bF, color.FontSize, iTextSharp.text.Font.NORMAL, color.Color);
 
             return font;
         }
