@@ -5,8 +5,6 @@ namespace Klat.ReportIO.Pdf
 {
     public interface ITable : IElementRoot
     {
-        int ColumnLenght { get; }
-
         ReportColor BackgoundColor { get; set; }
 
         FontList? FontList { get; set; }
@@ -30,5 +28,7 @@ namespace Klat.ReportIO.Pdf
         void AddRows(params ITableRow[] rows);
 
         ITableRow NewRow();
+
+        int GetColumnLenght();
     }
 }

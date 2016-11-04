@@ -1,6 +1,7 @@
 ﻿using Klat.ReportIO.Enums;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Klat.ReportIO.Pdf
 {
@@ -12,8 +13,6 @@ namespace Klat.ReportIO.Pdf
         }
 
         public string Id { get; set; }
-
-        public int ColumnLenght { get; private set; }
 
         public ReportColor BackgoundColor { get; set; }
 
@@ -41,7 +40,7 @@ namespace Klat.ReportIO.Pdf
 
         public static implicit operator iTextSharp.text.pdf.PdfPTable(Table tableSource)
         {
-            int columnLength = tableSource.ColumnLenght;
+            int columnLength = tableSource.GetColumnLenght();
             iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(columnLength);
             table.WidthPercentage = 100f;
             iTextSharp.text.pdf.PdfPCell cell;
@@ -52,32 +51,6 @@ namespace Klat.ReportIO.Pdf
                     cell = cellSource as TableCell;
                     table.AddCell(cell);
                 }
-
-                //int columnIndex = 1;
-                //while (true)
-                //{
-                //    if (columnIndex > row.Cells.Count)
-                //    {
-                //        break;
-                //    }
-
-                //    ITableCell cellSource = row.Cells[columnIndex - 1];
-                //    if (columnIndex + cellSource.Colspan - 1 > columnLength)
-                //    {
-                //        break;
-                //    }
-
-                //    cell = cellSource as TableCell;
-
-                //    table.AddCell(cell);
-                //    columnIndex += cellSource.Colspan ?? 1;
-                //}
-
-                //for (int i = columnIndex - 1; i < columnLength; i++)
-                //{
-                //    cell = row.NewCell() as TableCell;
-                //    table.AddCell(cell);
-                //}
             }
 
             return table;
@@ -85,7 +58,7 @@ namespace Klat.ReportIO.Pdf
 
         public static Table Create(int columnLength)
         {
-            return new Table { ColumnLenght = columnLength };
+            return new Table();
         }
 
         public ITableRow CreateRow()
@@ -147,9 +120,9 @@ namespace Klat.ReportIO.Pdf
             return row;
         }
 
-        public bool CalculateMergeCells()
+        public int GetColumnLenght()
         {
-            return false;
+            return Rows.Max(row => row.Cells.Sum(col => col.Colspan ?? 1));
         }
     }
 }

@@ -91,11 +91,12 @@ namespace Klat.Example
 
             ITableRow row2 = table.NewRow();
 
-            ITableCell r2c2 = row2.NewCell();
-            r2c2.Value = "R2C2";
+            ITableCell r2c23 = row2.NewCell();
+            r2c23.Colspan = 2;
+            r2c23.Value = "R2C2 - R2C3";
 
-            ITableCell r2c3 = row2.NewCell();
-            r2c3.Value = "R2C3";
+            //ITableCell r2c3 = row2.NewCell();
+            //r2c3.Value = "R2C3";
 
 
             ITableRow row3 = table.NewRow();
