@@ -74,15 +74,15 @@ namespace Klat.ReportIO
             };
         }
 
-        public static implicit operator BaseColor(ReportColor color)
-        {
-            return color.AsBaseColor();
-        }
-
 
         public static explicit operator ReportColor(BaseColor color)
         {
             return Create(color);
+        }
+
+        public static implicit operator BaseColor(ReportColor color)
+        {
+            return color.AsBaseColor();
         }
 
 
@@ -91,10 +91,19 @@ namespace Klat.ReportIO
             return Create(color);
         }
 
-
-        public static explicit operator string(ReportColor color)
+        public static implicit operator string(ReportColor color)
         {
             return ColorTranslator.ToHtml(color.Color);
+        }
+
+        public static explicit operator ReportColor(Color color)
+        {
+            return new ReportColor() { Color = color };
+        }
+
+        public static implicit operator Color(ReportColor color)
+        {
+            return color.Color;
         }
 
         public BaseColor AsBaseColor()

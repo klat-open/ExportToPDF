@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -48,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\ColorUtils.cs" />
     <Compile Include="Commons\ConvertUtils.cs" />
     <Compile Include="Commons\FontUtils.cs" />
     <Compile Include="Commons\PageSizeUtils.cs" />
@@ -56,6 +61,7 @@
     <Compile Include="Enums\PageOrientation.cs" />
     <Compile Include="Enums\PageSize.cs" />
     <Compile Include="Enums\TextAlignment.cs" />
+    <Compile Include="Extensions\EPPlusExtensions.cs" />
     <Compile Include="Pdf\Paragraph.cs" />
     <Compile Include="Pdf\Text.cs" />
     <Compile Include="ReportColor.cs" />

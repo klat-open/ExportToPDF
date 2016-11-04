@@ -13,6 +13,8 @@ namespace Klat.ReportIO.Pdf
 
         public int? Colspan { get; set; }
 
+        public int? Rowspan { get; set; }
+
         public ReportColor BackgoundColor { get; set; }
 
         public FontList? FontList { get; set; }

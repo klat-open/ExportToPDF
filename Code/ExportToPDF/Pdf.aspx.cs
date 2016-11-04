@@ -45,6 +45,9 @@ namespace Klat.Example
 
             document.AddParagraph(p1);
 
+            document.InsertFromExcel(MapPath("~/Uploads/data_empty.xlsx"));
+            document.InsertFromExcel(MapPath("~/Uploads/data.xlsx"));
+
             document.Save(MapPath("~/Uploads/b.pdf"));
         }
     }

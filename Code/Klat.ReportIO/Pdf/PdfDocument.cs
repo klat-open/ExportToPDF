@@ -1,8 +1,10 @@
 ﻿using Klat.ReportIO.Commons;
 using Klat.ReportIO.Enums;
+using OfficeOpenXml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,6 +54,84 @@ namespace Klat.ReportIO.Pdf
             Paragraphs.Add(table);
 
             return table;
+        }
+
+        /// <summary>
+        /// Hỗ trợ định dạng mới của excel (*.xlsx).
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void InsertFromExcel(string fileName)
+        {
+            FileInfo excelFile = new FileInfo(fileName);
+            using (var excel = new ExcelPackage(excelFile, false))
+            {
+                ExcelWorkbook workbook = excel.Workbook;
+                ExcelWorksheets worksheets = workbook.Worksheets;
+                foreach (ExcelWorksheet sheet in worksheets)
+                {
+                    ExcelAddressBase activeRange = sheet.Dimension;
+                    if (activeRange != null)
+                    {
+                        int columnLength = activeRange.Columns;
+                        int rowLength = activeRange.Rows;
+
+                        Table table = Table.Create(columnLength);
+                        // Duyệt từng dòng.
+                        for (int i = 1; i <= rowLength; i++)
+                        {
+                            TableRow tableRow = table.NewRow();
+                            // Duyệt từng cột.
+                            //int columnIndex = 1;
+                            for (int j = 1; j <= columnLength; j++)
+                            {
+                                TableCell tableCell = tableRow.NewCell();
+
+                                ExcelRange cell = sheet.Cells[i, j];
+                                int colspan = cell.Columns;
+                                int rowspan = cell.Rows;
+                                string text = cell.Text;
+
+                                tableCell.Value = text;
+                                tableCell.Colspan = colspan;
+                                tableCell.Rowspan = rowspan;
+
+                                tableCell.BackgoundColor = cell.Style.Fill.BackgroundColor.ToReportColor();
+                                if (!string.IsNullOrEmpty(text))
+                                {
+                                    if (cell.Style.Font.Bold && cell.Style.Font.Italic)
+                                    {
+                                        tableCell.Style = FontStyle.BoldItalic;
+                                    }
+                                    else if (cell.Style.Font.Bold)
+                                    {
+                                        tableCell.Style = FontStyle.Bold;
+                                    }
+                                    else if (cell.Style.Font.Italic)
+                                    {
+                                        tableCell.Style = FontStyle.Italic;
+                                    }
+
+                                    //if (cell.RichText.Any())
+                                    //{
+                                    //    tableCell.TextColor = cell.Style.Font.Color.ToReportColor();
+
+                                    //    // tableCell.TextColor = (ReportColor)cell.RichText.First().Color;
+                                    //    // tableCell.TextColor = ReportColor.While;
+                                    //}
+                                    //else
+                                    //{
+                                    //    tableCell.TextColor = cell.Style.Font.Color.ToReportColor();
+                                    //}
+                                }
+
+                                j = j + colspan - 1;
+                            }
+                        }
+
+                        AddParagraph(table);
+                    }
+                }
+            }
         }
 
         public static implicit operator iTextSharp.text.Document(PdfDocument pdfDocument)
