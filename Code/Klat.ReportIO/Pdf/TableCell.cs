@@ -5,6 +5,10 @@ namespace Klat.ReportIO.Pdf
 {
     public class TableCell : ITableCell
     {
+        private int? _colspan;
+        private int? _rowspan;
+        private bool _isMerge;
+
         internal TableCell()
         {
             Border = new Border();
@@ -14,9 +18,31 @@ namespace Klat.ReportIO.Pdf
 
         public string Value { get; set; }
 
-        public int? Colspan { get; set; }
+        public int? Colspan
+        {
+            get { return _colspan; }
+            set
+            {
+                _colspan = value;
+                _isMerge = value > 1 || Rowspan > 1;
+            }
+        }
 
-        public int? Rowspan { get; set; }
+        public int? Rowspan
+        {
+            get { return _rowspan; }
+            set
+            {
+                _rowspan = value;
+                _isMerge = value > 1 || Colspan > 1;
+            }
+        }
+
+        public bool IsMerge
+        {
+            get { return _isMerge; }
+            internal set { _isMerge = value; }
+        }
 
         public ReportColor BackgoundColor { get; set; }
 

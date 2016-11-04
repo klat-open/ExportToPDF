@@ -10,6 +10,8 @@ namespace Klat.ReportIO.Pdf
 
         int? Rowspan { get; set; }
 
+        bool IsMerge { get; }
+
         ReportColor BackgoundColor { get; set; }
 
         FontList? FontList { get; set; }

@@ -5,6 +5,8 @@ using OfficeOpenXml;
 using System.Collections.Generic;
 using System.IO;
 using OfficeOpenXml.Style;
+using static OfficeOpenXml.ExcelWorksheet;
+using System.Linq;
 
 namespace Klat.ReportIO.Pdf
 {
@@ -230,6 +232,50 @@ namespace Klat.ReportIO.Pdf
 
                                 j = j + colspan - 1;
                             }
+                        }
+
+                        // caculate merge cells.
+                        MergeCellsCollection mergeCells = sheet.MergedCells;
+                        foreach (string mergeCell in mergeCells)
+                        {
+                            var mergeRange = sheet.Cells[mergeCell];
+                            int startRow = mergeRange.Start.Row;
+                            int startColumn = mergeRange.Start.Column;
+                            int endRow = mergeRange.End.Row;
+                            int endColumn = mergeRange.End.Column;
+
+                            int colspan = endColumn - startColumn + 1;
+                            int rowspan = endRow - startRow + 1;
+                            for (int i = startRow; i <= endRow; i++)
+                            {
+                                for (int j = startColumn; j < endColumn; j++)
+                                {
+                                    ITableCell cellMerge = table.Rows[i - 1].Cells[j - 1];
+                                    if (i == startRow && j == startColumn)
+                                    {
+                                        if (colspan > 1)
+                                        {
+                                            cellMerge.Colspan = colspan;
+                                        }
+
+                                        if (rowspan > 1)
+                                        {
+                                            cellMerge.Rowspan = rowspan;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ((TableCell)cellMerge).IsMerge = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        // Xoá tất cả cell merge có Colspan <= 1 && Rowspan <= 1
+                        // IEnumerable<ITableCell> mergeCellsTmp = table.Rows.SelectMany(row => row.Cells).Where(cell => cell.IsMerge && (!cell.Colspan.HasValue || cell.Colspan <= 1) && (!cell.Rowspan.HasValue || cell.Rowspan <= 1));
+                        foreach (ITableRow row in table.Rows)
+                        {
+                            row.Cells.RemoveAll(cell => cell.IsMerge && (!cell.Colspan.HasValue || cell.Colspan <= 1) && (!cell.Rowspan.HasValue || cell.Rowspan <= 1));
                         }
 
                         AddElement(table);

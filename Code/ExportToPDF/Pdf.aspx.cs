@@ -71,44 +71,44 @@ namespace Klat.Example
             PdfDocument document = new PdfDocument(PageSize.A4);
             document.PageOrientation = PageOrientation.Landscape;
 
-            ITable table = document.NewTable(3);
-            ITableRow row1 = table.NewRow();
-            row1.BackgoundColor = ReportColor.Red;
-            row1.TextColor = ReportColor.While;
+            //ITable table = document.NewTable(3);
+            //ITableRow row1 = table.NewRow();
+            //row1.BackgoundColor = ReportColor.Red;
+            //row1.TextColor = ReportColor.While;
 
-            ITableCell r1c123 = row1.NewCell();
-            r1c123.Value = "R1C1 - R2C1 - R3C1";
-            r1c123.HorizontalAlignment = HorizontalAlignment.Center;
-            r1c123.VerticalAlignment = VerticalAlignment.Middle;
-            r1c123.Rowspan = 3;
+            //ITableCell r1c123 = row1.NewCell();
+            //r1c123.Value = "R1C1 - R2C1 - R3C1";
+            //r1c123.HorizontalAlignment = HorizontalAlignment.Center;
+            //r1c123.VerticalAlignment = VerticalAlignment.Middle;
+            //r1c123.Rowspan = 3;
 
-            ITableCell r1c2 = row1.NewCell();
-            r1c2.Value = "R1C2";
+            //ITableCell r1c2 = row1.NewCell();
+            //r1c2.Value = "R1C2";
 
-            ITableCell r1c3 = row1.NewCell();
-            r1c3.Value = "R1C3";
-
-
-            ITableRow row2 = table.NewRow();
-
-            ITableCell r2c23 = row2.NewCell();
-            r2c23.Colspan = 2;
-            r2c23.Value = "R2C2 - R2C3";
-
-            //ITableCell r2c3 = row2.NewCell();
-            //r2c3.Value = "R2C3";
+            //ITableCell r1c3 = row1.NewCell();
+            //r1c3.Value = "R1C3";
 
 
-            ITableRow row3 = table.NewRow();
+            //ITableRow row2 = table.NewRow();
 
-            ITableCell r3c2 = row3.NewCell();
-            r3c2.Value = "R3C2";
+            //ITableCell r2c23 = row2.NewCell();
+            //r2c23.Colspan = 2;
+            //r2c23.Value = "R2C2 - R2C3";
 
-            ITableCell r3c3 = row3.NewCell();
-            r3c3.Value = "R3C3";
+            ////ITableCell r2c3 = row2.NewCell();
+            ////r2c3.Value = "R2C3";
 
 
-            // document.InsertFromExcel(MapPath("~/Uploads/data_merge_row.xlsx"));
+            //ITableRow row3 = table.NewRow();
+
+            //ITableCell r3c2 = row3.NewCell();
+            //r3c2.Value = "R3C2";
+
+            //ITableCell r3c3 = row3.NewCell();
+            //r3c3.Value = "R3C3";
+
+
+            document.InsertFromExcel(MapPath("~/Uploads/data_merge_row.xlsx"));
 
             document.Save(MapPath("~/Uploads/data_merge_row.pdf"));
         }
