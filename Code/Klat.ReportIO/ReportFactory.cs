@@ -45,8 +45,6 @@ namespace Klat.ReportIO
 
         public static VerticalAlignment TableVerticalAlignment { get; set; }
 
-        public static int TableCellColspan { get; set; }
-
         public static float? TableCellPaddingTop { get; set; }
 
         public static float? TableCellPaddingRight { get; set; }
@@ -75,7 +73,6 @@ namespace Klat.ReportIO
             TableFontSize = 13f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
-            TableCellColspan = 1;
             TableCellPaddingTop = null;
             TableCellPaddingRight = null;
             TableCellPaddingBottom = null;
@@ -102,7 +99,6 @@ namespace Klat.ReportIO
             TableFontSize = 9f;
             TableHorizontalAlignment = HorizontalAlignment.Left;
             TableVerticalAlignment = VerticalAlignment.Top;
-            TableCellColspan = 1;
             TableCellPaddingTop = null;
             TableCellPaddingRight = null;
             TableCellPaddingBottom = 5f;

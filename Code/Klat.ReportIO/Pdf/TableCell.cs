@@ -83,7 +83,7 @@ namespace Klat.ReportIO.Pdf
                 cell = new PdfPCell(phrase);
             }
 
-            int? colspan = cellSource.Colspan ?? ReportFactory.TableCellColspan;
+            int? colspan = cellSource.Colspan;
             if (colspan.HasValue && colspan > 1)
             {
                 cell.Colspan = colspan.Value;
