@@ -115,32 +115,11 @@ namespace Klat.ReportIO.Pdf
                                 ITableCell tableCell = tableRow.NewCell();
 
                                 ExcelRange cell = sheet.Cells[i, j];
-                                int colspan = cell.Columns;
-                                int rowspan = cell.Rows;
-                                string text = cell.Text;
-
-                                tableCell.Value = text;
-                                tableCell.Colspan = colspan;
-                                tableCell.Rowspan = rowspan;
 
                                 // tableCell.BackgoundColor = cell.Style.Fill.BackgroundColor.ToReportColorByExcelColor();
                                 var style = cell.Style;
                                 var fill = style.Fill;
                                 var font = style.Font;
-
-                                string rgbForbackgound; // See more: http://stackoverflow.com/questions/35941241/epplus-get-correct-cell-background-rgb-color
-                                if (fill.PatternType == ExcelFillStyle.Solid)
-                                {
-                                    rgbForbackgound = !string.IsNullOrEmpty(fill.BackgroundColor.Rgb) ? fill.BackgroundColor.Rgb : fill.PatternColor.LookupColor(fill.BackgroundColor);
-                                }
-                                else if (fill.PatternType != ExcelFillStyle.None)
-                                {
-                                    rgbForbackgound = !string.IsNullOrEmpty(fill.PatternColor.Rgb) ? fill.PatternColor.Rgb : fill.PatternColor.LookupColor(fill.PatternColor);
-                                }
-                                else
-                                {
-                                    rgbForbackgound = null;
-                                }
 
                                 // border
                                 if (style.Border.Top.Style == ExcelBorderStyle.None)
@@ -179,28 +158,7 @@ namespace Klat.ReportIO.Pdf
                                     tableCell.Border.Left.Style = BorderStyle.Solid;
                                 }
 
-                                if (cell.IsRichText)
-                                {
-                                    // ExcelRichTextCollection richTextCollection = cell.RichText;
-                                    // var dictionaryTextToColour = richTextCollection.ToDictionary(rt => rt.Text, rt => rt.Color); //NOT recommended to use a dictionary here
-                                }
-                                else
-                                {
-                                    tableCell.TextColor = cell.GetTextColor(cells);
-                                }
-
-                                if (!string.IsNullOrEmpty(rgbForbackgound))
-                                {
-                                    tableCell.BackgoundColor = rgbForbackgound.ToReportColorByRgb();
-                                }
-
-                                // merge cell
-                                if (cell.Merge)
-                                {
-                                    // string columnSpan = cell.Table.ColumnSpan;
-                                }
-
-                                if (string.IsNullOrEmpty(text))
+                                if (string.IsNullOrEmpty(cell.Text))
                                 {
                                     // Gán cell đầu tiên của hàng là 1 space để nếu hàng có tất cả các cell empty thì in ra PDF vẫn có hàng đó (mặc định không hiển thị).
                                     if (j == 1)
@@ -210,6 +168,7 @@ namespace Klat.ReportIO.Pdf
                                 }
                                 else
                                 {
+                                    tableCell.Value = cell.Text;
                                     if (font.Bold && font.Italic)
                                     {
                                         tableCell.Style = FontStyle.BoldItalic;
@@ -229,8 +188,6 @@ namespace Klat.ReportIO.Pdf
                                     tableCell.HorizontalAlignment = style.HorizontalAlignment.ToHorizontalAlignment();
                                     tableCell.VerticalAlignment = style.VerticalAlignment.ToVerticalAlignment();
                                 }
-
-                                j = j + colspan - 1;
                             }
                         }
 
@@ -248,7 +205,7 @@ namespace Klat.ReportIO.Pdf
                             int rowspan = endRow - startRow + 1;
                             for (int i = startRow; i <= endRow; i++)
                             {
-                                for (int j = startColumn; j < endColumn; j++)
+                                for (int j = startColumn; j <= endColumn; j++)
                                 {
                                     ITableCell cellMerge = table.Rows[i - 1].Cells[j - 1];
                                     if (i == startRow && j == startColumn)

@@ -68,7 +68,7 @@ namespace Klat.Example
         protected void ExportToPdfMergeRowButton_Click(object sender, EventArgs e)
         {
             ReportFactory.SetStyle1ForPDF();
-            PdfDocument document = new PdfDocument(PageSize.A4);
+            PdfDocument document = new PdfDocument(PageSize.A0);
             document.PageOrientation = PageOrientation.Landscape;
 
             //ITable table = document.NewTable(3);
