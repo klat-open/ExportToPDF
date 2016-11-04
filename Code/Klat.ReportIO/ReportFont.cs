@@ -17,6 +17,16 @@ namespace Klat.ReportIO
 
         public FontStyle Style { get; set; }
 
+        public static implicit operator Font(ReportFont color)
+        {
+            string fontPath = FontUtils.GetFontPath(color.FontList, color.Style);
+            //BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font = new Font(bF, color.FontSize, Font.NORMAL, color.Color);
+
+            return font;
+        }
+
         public static ReportFont Create()
         {
             return new ReportFont();
@@ -31,16 +41,6 @@ namespace Klat.ReportIO
                 FontSize = fontSize,
                 Style = style
             };
-        }
-
-        public static implicit operator Font(ReportFont color)
-        {
-            string fontPath = FontUtils.GetFontPath(color.FontList, color.Style);
-            //BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-            BaseFont bF = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Font font = new Font(bF, color.FontSize, Font.NORMAL, color.Color);
-
-            return font;
         }
     }
 }

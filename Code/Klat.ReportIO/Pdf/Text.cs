@@ -1,8 +1,9 @@
-﻿using Klat.ReportIO.Enums;
+﻿using System;
+using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class Text: IElement, IElementContent
+    public class Text : IText
     {
         public Text()
         {
@@ -13,6 +14,8 @@ namespace Klat.ReportIO.Pdf
         {
             Value = value;
         }
+
+        public string Id { get; set; }
 
         public string Value { get; set; }
 

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class Table : IElementRoot
+    public class Table : ITable
     {
         internal Table()
         {
-            Rows = new List<TableRow>();
+            Rows = new List<ITableRow>();
         }
+
+        public string Id { get; set; }
 
         public int ColumnLenght { get; private set; }
 
@@ -26,7 +28,7 @@ namespace Klat.ReportIO.Pdf
 
         public VerticalAlignment? VerticalAlignment { get; set; }
 
-        public List<TableRow> Rows { get; set; }
+        public List<ITableRow> Rows { get; set; }
 
         public float? PaddingTop { get; set; }
 
@@ -36,14 +38,52 @@ namespace Klat.ReportIO.Pdf
 
         public float? PaddingLeft { get; set; }
 
+        public static implicit operator iTextSharp.text.pdf.PdfPTable(Table tableSource)
+        {
+            int columnLength = tableSource.ColumnLenght;
+            iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(columnLength);
+            table.WidthPercentage = 100f;
+            iTextSharp.text.pdf.PdfPCell cell;
+            foreach (ITableRow row in tableSource.Rows)
+            {
+                int columnIndex = 1;
+                while (true)
+                {
+                    if (columnIndex > row.Cells.Count)
+                    {
+                        break;
+                    }
+
+                    ITableCell cellSource = row.Cells[columnIndex - 1];
+                    if (columnIndex + cellSource.Colspan - 1 > columnLength)
+                    {
+                        break;
+                    }
+
+                    cell = cellSource as TableCell;
+
+                    table.AddCell(cell);
+                    columnIndex += cellSource.Colspan ?? 1;
+                }
+
+                for (int i = columnIndex - 1; i < columnLength; i++)
+                {
+                    cell = row.NewCell() as TableCell;
+                    table.AddCell(cell);
+                }
+            }
+
+            return table;
+        }
+
         public static Table Create(int columnLength)
         {
             return new Table { ColumnLenght = columnLength };
         }
 
-        public TableRow CreateRow()
+        public ITableRow CreateRow()
         {
-            TableRow row = TableRow.Create();
+            ITableRow row = TableRow.Create();
             if (BackgoundColor != null)
             {
                 row.BackgoundColor = BackgoundColor;
@@ -82,60 +122,22 @@ namespace Klat.ReportIO.Pdf
             return row;
         }
 
-        public void AddRow(TableRow row)
+        public void AddRow(ITableRow row)
         {
             Rows.Add(row);
         }
 
-        public void AddRows(params TableRow[] rows)
+        public void AddRows(params ITableRow[] rows)
         {
             Rows.AddRange(rows);
         }
 
-        public TableRow NewRow()
+        public ITableRow NewRow()
         {
-            TableRow row = CreateRow();
+            ITableRow row = CreateRow();
             AddRow(row);
 
             return row;
-        }
-
-        public static implicit operator iTextSharp.text.pdf.PdfPTable(Table tableSource)
-        {
-            int columnLength = tableSource.ColumnLenght;
-            iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(columnLength);
-            table.WidthPercentage = 100f;
-            iTextSharp.text.pdf.PdfPCell cell;
-            foreach (TableRow row in tableSource.Rows)
-            {
-                int columnIndex = 1;
-                while (true)
-                {
-                    if (columnIndex > row.Cells.Count)
-                    {
-                        break;
-                    }
-
-                    TableCell cellSource = row.Cells[columnIndex - 1];
-                    if (columnIndex + cellSource.Colspan - 1 > columnLength)
-                    {
-                        break;
-                    }
-
-                    cell = cellSource;
-
-                    table.AddCell(cell);
-                    columnIndex += cellSource.Colspan ?? 1;
-                }
-
-                for (int i = columnIndex - 1; i < columnLength; i++)
-                {
-                    cell = row.NewCell();
-                    table.AddCell(cell);
-                }
-            }
-
-            return table;
         }
     }
 }

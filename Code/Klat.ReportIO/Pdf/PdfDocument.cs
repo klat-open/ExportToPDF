@@ -8,14 +8,15 @@ using OfficeOpenXml.Style;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class PdfDocument
+    public class PdfDocument : IPdfDocument
     {
         public PdfDocument()
         {
-
+            Paragraphs = new List<IElementRoot>();
         }
 
         public PdfDocument(PageSize pageSize)
+            : this()
         {
             PageSize = pageSize;
         }
@@ -32,16 +33,41 @@ namespace Klat.ReportIO.Pdf
 
         public float? MarginLeft { get; set; }
 
-        public List<IElementRoot> Paragraphs = new List<IElementRoot>();
+        public List<IElementRoot> Paragraphs { get; set; }
 
-        public void AddParagraph(Table table)
+        public static implicit operator iTextSharp.text.Document(PdfDocument pdfDocument)
         {
-            Paragraphs.Add(table);
+            PageSize currentPageSize = pdfDocument.PageSize ?? ReportFactory.PageSize;
+            iTextSharp.text.Rectangle pageSize = PageSizeUtils.ToRectangle(currentPageSize);
+            var document = new iTextSharp.text.Document(pageSize, 10, 10, 10, 10);
+            document.Open();
+
+            foreach (var paragraph in pdfDocument.Paragraphs)
+            {
+                if (paragraph is Table)
+                {
+                    iTextSharp.text.pdf.PdfPTable tableSource = paragraph as Table;
+                    document.Add(tableSource);
+                }
+                else if (paragraph is Paragraph)
+                {
+
+                }
+            }
+
+            document.Close();
+
+            return document;
         }
 
-        public void AddParagraph(Paragraph paragraph)
+        public void AddElement(IElementRoot element)
         {
-            Paragraphs.Add(paragraph);
+            Paragraphs.Add(element);
+        }
+
+        public void AddElements(params IElementRoot[] elements)
+        {
+            Paragraphs.AddRange(elements);
         }
 
         public Table NewTable(int columLength)
@@ -75,16 +101,16 @@ namespace Klat.ReportIO.Pdf
                         ExcelRange cells = sheet.Cells[activeRange.Start.Row, activeRange.Start.Column, activeRange.End.Row, activeRange.End.Column];
                         // ExcelStyle fullStyle = cells.Style;
 
-                        Table table = Table.Create(columnLength);
+                        ITable table = Table.Create(columnLength);
                         // Duyệt từng dòng.
                         for (int i = 1; i <= rowLength; i++)
                         {
-                            TableRow tableRow = table.NewRow();
+                            ITableRow tableRow = table.NewRow();
                             // Duyệt từng cột.
                             //int columnIndex = 1;
                             for (int j = 1; j <= columnLength; j++)
                             {
-                                TableCell tableCell = tableRow.NewCell();
+                                ITableCell tableCell = tableRow.NewCell();
 
                                 ExcelRange cell = sheet.Cells[i, j];
                                 int colspan = cell.Columns;
@@ -206,35 +232,10 @@ namespace Klat.ReportIO.Pdf
                             }
                         }
 
-                        AddParagraph(table);
+                        AddElement(table);
                     }
                 }
             }
-        }
-
-        public static implicit operator iTextSharp.text.Document(PdfDocument pdfDocument)
-        {
-            PageSize currentPageSize = pdfDocument.PageSize ?? ReportFactory.PageSize;
-            iTextSharp.text.Rectangle pageSize = PageSizeUtils.ToRectangle(currentPageSize);
-            var document = new iTextSharp.text.Document(pageSize, 10, 10, 10, 10);
-            document.Open();
-
-            foreach (var paragraph in pdfDocument.Paragraphs)
-            {
-                if (paragraph is Table)
-                {
-                    iTextSharp.text.pdf.PdfPTable tableSource = paragraph as Table;
-                    document.Add(tableSource);
-                }
-                else if (paragraph is Paragraph)
-                {
-
-                }
-            }
-
-            document.Close();
-
-            return document;
         }
 
         public void Save(string fileName, Func<List<IElementRoot>, List<IElementRoot>> formatFunc = null)

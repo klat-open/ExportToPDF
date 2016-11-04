@@ -4,21 +4,23 @@ using System.Collections.Generic;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class Paragraph : IElementRoot
+    public class Paragraph : IParagraph
     {
         public Paragraph()
         {
-            Texts = new List<Text>();
+            Texts = new List<IText>();
         }
 
         public Paragraph(string text)
             : this()
         {
-            Text t = new Text(text);
+            IText t = new Text(text);
             Texts.Add(t);
         }
 
-        public List<Text> Texts { get; set; }
+        public string Id { get; set; }
+
+        public List<IText> Texts { get; set; }
 
         public TextAlignment? TextAlign { get; set; }
 
@@ -40,26 +42,53 @@ namespace Klat.ReportIO.Pdf
 
         public float? PaddingLeft { get; set; }
 
-        public Text CreateText()
+        public static implicit operator iTextSharp.text.Paragraph(Paragraph paragraphSource)
+        {
+            iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph();
+            if (paragraphSource.TextAlign.HasValue)
+            {
+                paragraph.Alignment = paragraphSource.TextAlign.Value.ToITextSharpValue();
+            }
+
+            float? paddingBottom = paragraphSource.PaddingBottom ?? ReportFactory.ParagraphPaddingBottom;
+            if (paddingBottom.HasValue)
+            {
+                paragraph.SpacingAfter = paddingBottom.Value;
+            }
+
+            iTextSharp.text.Phrase phrase = new iTextSharp.text.Phrase();
+
+            foreach (Text item in paragraphSource.Texts)
+            {
+                iTextSharp.text.Chunk chunk = item;
+                phrase.Add(chunk);
+            }
+
+            paragraph.Add(phrase);
+
+            return paragraph;
+        }
+
+        public IText CreateText()
         {
             Text text = new Text();
 
             return text;
         }
 
-        public void AddText(Text text)
+        public void AddText(IText text)
         {
             Texts.Add(text);
         }
 
-        public void AddTexts(params Text[] texts)
+        public void AddTexts(params IText[] texts)
         {
             Texts.AddRange(texts);
         }
 
-        public Text NewText()
+        public IText NewText()
         {
-            Text text = CreateText();
+            IText text = CreateText();
 
             if (BackgoundColor != null)
             {
@@ -89,33 +118,6 @@ namespace Klat.ReportIO.Pdf
             AddText(text);
 
             return text;
-        }
-
-        public static implicit operator iTextSharp.text.Paragraph(Paragraph paragraphSource)
-        {
-            iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph();
-            if (paragraphSource.TextAlign.HasValue)
-            {
-                paragraph.Alignment = paragraphSource.TextAlign.Value.ToITextSharpValue();
-            }
-
-            float? paddingBottom = paragraphSource.PaddingBottom ?? ReportFactory.ParagraphPaddingBottom;
-            if (paddingBottom.HasValue)
-            {
-                paragraph.SpacingAfter = paddingBottom.Value;
-            }
-
-            iTextSharp.text.Phrase phrase = new iTextSharp.text.Phrase();
-
-            foreach (Text item in paragraphSource.Texts)
-            {
-                iTextSharp.text.Chunk chunk = item;
-                phrase.Add(chunk);
-            }
-
-            paragraph.Add(phrase);
-
-            return paragraph;
         }
     }
 }

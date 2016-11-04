@@ -2,7 +2,7 @@
 
 namespace Klat.ReportIO.Pdf
 {
-    public interface IElementContent
+    public interface IElementContent : IElement
     {
         string Value { get; set; }
 

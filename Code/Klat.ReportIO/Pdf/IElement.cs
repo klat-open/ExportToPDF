@@ -2,5 +2,6 @@
 {
     public interface IElement
     {
+        string Id { get; set; }
     }
 }

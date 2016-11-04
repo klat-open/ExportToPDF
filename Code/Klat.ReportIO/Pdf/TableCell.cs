@@ -5,12 +5,14 @@ using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class TableCell : IElement
+    public class TableCell : ITableCell
     {
         internal TableCell()
         {
             Border = new Border();
         }
+
+        public string Id { get; set; }
 
         public string Value { get; set; }
 
@@ -41,19 +43,6 @@ namespace Klat.ReportIO.Pdf
         public float? PaddingLeft { get; set; }
 
         public Border Border { get; set; }
-
-        public static TableCell Create()
-        {
-            return new TableCell();
-        }
-
-        public static TableCell Create(string value)
-        {
-            return new TableCell
-            {
-                Value = value
-            };
-        }
 
         public static implicit operator PdfPCell(TableCell cellSource)
         {
@@ -154,6 +143,19 @@ namespace Klat.ReportIO.Pdf
             }
 
             return cell;
+        }
+
+        public static TableCell Create()
+        {
+            return new TableCell();
+        }
+
+        public static TableCell Create(string value)
+        {
+            return new TableCell
+            {
+                Value = value
+            };
         }
 
         //public PdfPCell AsPdfCell()

@@ -3,14 +3,16 @@ using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class TableRow: IElement
+    public class TableRow : ITableRow
     {
         internal TableRow()
         {
-            Cells = new List<TableCell>();
+            Cells = new List<ITableCell>();
         }
 
-        public List<TableCell> Cells { get; set; }
+        public string Id { get; set; }
+
+        public List<ITableCell> Cells { get; set; }
 
         public ReportColor BackgoundColor { get; set; }
 
@@ -26,16 +28,16 @@ namespace Klat.ReportIO.Pdf
 
         public VerticalAlignment? VerticalAlignment { get; set; }
 
-        public static TableRow Create()
+        public static ITableRow Create()
         {
-            TableRow row = new TableRow();
+            ITableRow row = new TableRow();
 
             return row;
         }
 
-        public TableCell CreateCell()
+        public ITableCell CreateCell()
         {
-            TableCell cell = TableCell.Create();
+            ITableCell cell = TableCell.Create();
             if (BackgoundColor != null)
             {
                 cell.BackgoundColor = BackgoundColor;
@@ -74,19 +76,19 @@ namespace Klat.ReportIO.Pdf
             return cell;
         }
 
-        public void AddCell(TableCell cell)
+        public void AddCell(ITableCell cell)
         {
             Cells.Add(cell);
         }
 
-        public void AddCells(params TableCell[] cells)
+        public void AddCells(params ITableCell[] cells)
         {
             Cells.AddRange(cells);
         }
 
-        public TableCell NewCell()
+        public ITableCell NewCell()
         {
-            TableCell cell = CreateCell();
+            ITableCell cell = CreateCell();
             AddCell(cell);
 
             return cell;

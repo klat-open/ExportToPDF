@@ -68,6 +68,12 @@
     <Compile Include="Pdf\BorderItem.cs" />
     <Compile Include="Pdf\IElement.cs" />
     <Compile Include="Pdf\IElementContent.cs" />
+    <Compile Include="Pdf\IParagraph.cs" />
+    <Compile Include="Pdf\IPdfDocument.cs" />
+    <Compile Include="Pdf\ITable.cs" />
+    <Compile Include="Pdf\ITableCell.cs" />
+    <Compile Include="Pdf\ITableRow.cs" />
+    <Compile Include="Pdf\IText.cs" />
     <Compile Include="Pdf\Paragraph.cs" />
     <Compile Include="Pdf\IElementRoot.cs" />
     <Compile Include="Pdf\Text.cs" />

@@ -17,6 +17,36 @@ namespace Klat.ReportIO
 
         public Color Color { get; set; }
 
+        public static explicit operator ReportColor(BaseColor color)
+        {
+            return Create(color);
+        }
+
+        public static implicit operator BaseColor(ReportColor color)
+        {
+            return new BaseColor(color.Color);
+        }
+
+        public static explicit operator ReportColor(string color)
+        {
+            return Create(color);
+        }
+
+        public static implicit operator string(ReportColor color)
+        {
+            return ColorTranslator.ToHtml(color.Color);
+        }
+
+        public static explicit operator ReportColor(Color color)
+        {
+            return new ReportColor() { Color = color };
+        }
+
+        public static implicit operator Color(ReportColor color)
+        {
+            return color.Color;
+        }
+
         public static ReportColor Create()
         {
             return ReportFactory.TextColor;
@@ -72,43 +102,6 @@ namespace Klat.ReportIO
             {
                 Color = System.Drawing.Color.FromArgb(alpha, red, green, blue)
             };
-        }
-
-
-        public static explicit operator ReportColor(BaseColor color)
-        {
-            return Create(color);
-        }
-
-        public static implicit operator BaseColor(ReportColor color)
-        {
-            return color.AsBaseColor();
-        }
-
-
-        public static explicit operator ReportColor(string color)
-        {
-            return Create(color);
-        }
-
-        public static implicit operator string(ReportColor color)
-        {
-            return ColorTranslator.ToHtml(color.Color);
-        }
-
-        public static explicit operator ReportColor(Color color)
-        {
-            return new ReportColor() { Color = color };
-        }
-
-        public static implicit operator Color(ReportColor color)
-        {
-            return color.Color;
-        }
-
-        public BaseColor AsBaseColor()
-        {
-            return new BaseColor(Color);
         }
     }
 }
