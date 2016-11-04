@@ -1,5 +1,6 @@
 ﻿using Klat.ReportIO.Enums;
 using System.Collections.Generic;
+using System;
 
 namespace Klat.ReportIO.Pdf
 {
@@ -44,33 +45,39 @@ namespace Klat.ReportIO.Pdf
             iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(columnLength);
             table.WidthPercentage = 100f;
             iTextSharp.text.pdf.PdfPCell cell;
-            foreach (ITableRow row in tableSource.Rows)
+            foreach (ITableRow rowSource in tableSource.Rows)
             {
-                int columnIndex = 1;
-                while (true)
+                foreach (var cellSource in rowSource.Cells)
                 {
-                    if (columnIndex > row.Cells.Count)
-                    {
-                        break;
-                    }
-
-                    ITableCell cellSource = row.Cells[columnIndex - 1];
-                    if (columnIndex + cellSource.Colspan - 1 > columnLength)
-                    {
-                        break;
-                    }
-
                     cell = cellSource as TableCell;
-
-                    table.AddCell(cell);
-                    columnIndex += cellSource.Colspan ?? 1;
-                }
-
-                for (int i = columnIndex - 1; i < columnLength; i++)
-                {
-                    cell = row.NewCell() as TableCell;
                     table.AddCell(cell);
                 }
+
+                //int columnIndex = 1;
+                //while (true)
+                //{
+                //    if (columnIndex > row.Cells.Count)
+                //    {
+                //        break;
+                //    }
+
+                //    ITableCell cellSource = row.Cells[columnIndex - 1];
+                //    if (columnIndex + cellSource.Colspan - 1 > columnLength)
+                //    {
+                //        break;
+                //    }
+
+                //    cell = cellSource as TableCell;
+
+                //    table.AddCell(cell);
+                //    columnIndex += cellSource.Colspan ?? 1;
+                //}
+
+                //for (int i = columnIndex - 1; i < columnLength; i++)
+                //{
+                //    cell = row.NewCell() as TableCell;
+                //    table.AddCell(cell);
+                //}
             }
 
             return table;
@@ -138,6 +145,11 @@ namespace Klat.ReportIO.Pdf
             AddRow(row);
 
             return row;
+        }
+
+        public bool CalculateMergeCells()
+        {
+            return false;
         }
     }
 }

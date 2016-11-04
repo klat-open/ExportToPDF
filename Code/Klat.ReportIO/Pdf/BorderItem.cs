@@ -6,7 +6,9 @@ namespace Klat.ReportIO.Pdf
     {
         public BorderItem()
         {
-
+            Width = 1;
+            Style = BorderStyle.Solid;
+            Color = ReportColor.Black;
         }
 
         public BorderItem(int? width, BorderStyle style, ReportColor color)

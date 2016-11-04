@@ -76,6 +76,12 @@ namespace Klat.ReportIO.Pdf
                 cell.Colspan = colspan.Value;
             }
 
+            int? rowspan = cellSource.Rowspan;
+            if (rowspan.HasValue && rowspan > 1)
+            {
+                cell.Rowspan = rowspan.Value;
+            }
+
             ReportColor backgroundColor = cellSource.BackgoundColor ?? ReportFactory.BackgoundColor;
             if (backgroundColor != null)
             {

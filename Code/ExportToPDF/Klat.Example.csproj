@@ -235,6 +235,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Uploads\data_empty.xlsx" />
     <Content Include="Uploads\data.xlsx" />
+    <Content Include="Uploads\data_merge_row.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
