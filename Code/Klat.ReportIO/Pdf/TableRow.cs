@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class TableRow
+    public class TableRow: IElement
     {
         internal TableRow()
         {

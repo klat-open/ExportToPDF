@@ -1,13 +1,9 @@
 ﻿using Klat.ReportIO.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class Table
+    public class Table : IElementRoot
     {
         internal Table()
         {
@@ -31,6 +27,14 @@ namespace Klat.ReportIO.Pdf
         public VerticalAlignment? VerticalAlignment { get; set; }
 
         public List<TableRow> Rows { get; set; }
+
+        public float? PaddingTop { get; set; }
+
+        public float? PaddingRight { get; set; }
+
+        public float? PaddingBottom { get; set; }
+
+        public float? PaddingLeft { get; set; }
 
         public static Table Create(int columnLength)
         {
@@ -119,7 +123,7 @@ namespace Klat.ReportIO.Pdf
                     }
 
                     cell = cellSource;
-                    
+
                     table.AddCell(cell);
                     columnIndex += cellSource.Colspan ?? 1;
                 }

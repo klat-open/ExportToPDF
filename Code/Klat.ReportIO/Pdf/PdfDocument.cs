@@ -1,14 +1,9 @@
-﻿using Klat.ReportIO.Commons;
+﻿using System;
+using Klat.ReportIO.Commons;
 using Klat.ReportIO.Enums;
 using OfficeOpenXml;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OfficeOpenXml.Style;
 
 namespace Klat.ReportIO.Pdf
@@ -37,7 +32,7 @@ namespace Klat.ReportIO.Pdf
 
         public float? MarginLeft { get; set; }
 
-        public ArrayList Paragraphs = new ArrayList();
+        public List<IElementRoot> Paragraphs = new List<IElementRoot>();
 
         public void AddParagraph(Table table)
         {
@@ -78,7 +73,7 @@ namespace Klat.ReportIO.Pdf
                         int rowLength = activeRange.Rows;
 
                         ExcelRange cells = sheet.Cells[activeRange.Start.Row, activeRange.Start.Column, activeRange.End.Row, activeRange.End.Column];
-                        ExcelStyle fullStyle = cells.Style;
+                        // ExcelStyle fullStyle = cells.Style;
 
                         Table table = Table.Create(columnLength);
                         // Duyệt từng dòng.
@@ -158,7 +153,7 @@ namespace Klat.ReportIO.Pdf
 
                                 if (cell.IsRichText)
                                 {
-                                    ExcelRichTextCollection richTextCollection = cell.RichText;
+                                    // ExcelRichTextCollection richTextCollection = cell.RichText;
                                     // var dictionaryTextToColour = richTextCollection.ToDictionary(rt => rt.Text, rt => rt.Color); //NOT recommended to use a dictionary here
                                 }
                                 else
@@ -242,8 +237,13 @@ namespace Klat.ReportIO.Pdf
             return document;
         }
 
-        public void Save(string fileName)
+        public void Save(string fileName, Func<List<IElementRoot>, List<IElementRoot>> formatFunc = null)
         {
+            if (formatFunc != null)
+            {
+                formatFunc.Invoke(Paragraphs);
+            }
+
             string defaultFontPath = FontUtils.GetFontPath(ReportFactory.FontList, ReportFactory.FontStyle);
             iTextSharp.text.FontFactory.Register(defaultFontPath);
 
@@ -252,7 +252,7 @@ namespace Klat.ReportIO.Pdf
                 PageSize currentPageSize = PageSize ?? ReportFactory.PageSize;
 
                 PageOrientation pageOrientation = PageOrientation ?? ReportFactory.PageOrientation;
-                iTextSharp.text.Rectangle pageSize = PageSizeUtils.ToRectangle(currentPageSize, pageOrientation);
+                iTextSharp.text.Rectangle pageSize = currentPageSize.ToRectangle(pageOrientation);
                 using (var document = new iTextSharp.text.Document(pageSize))
                 {
                     float marginTop = MarginLeft ?? ReportFactory.MarginLeft;
@@ -261,7 +261,7 @@ namespace Klat.ReportIO.Pdf
                     float marginLeft = MarginLeft ?? ReportFactory.MarginLeft;
                     document.SetMargins(marginLeft, marginRight, marginTop, marginBottom);
 
-                    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, fileStream);
+                    iTextSharp.text.pdf.PdfWriter writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, fileStream);
                     document.Open();
 
                     foreach (var para in Paragraphs)

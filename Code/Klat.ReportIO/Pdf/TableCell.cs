@@ -5,7 +5,7 @@ using Klat.ReportIO.Enums;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class TableCell
+    public class TableCell : IElement
     {
         internal TableCell()
         {

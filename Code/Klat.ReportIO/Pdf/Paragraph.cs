@@ -1,14 +1,10 @@
 ﻿using Klat.ReportIO.Commons;
 using Klat.ReportIO.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Klat.ReportIO.Pdf
 {
-    public class Paragraph
+    public class Paragraph : IElementRoot
     {
         public Paragraph()
         {
@@ -36,7 +32,13 @@ namespace Klat.ReportIO.Pdf
 
         public FontStyle? Style { get; set; }
 
+        public float? PaddingTop { get; set; }
+
+        public float? PaddingRight { get; set; }
+
         public float? PaddingBottom { get; set; }
+
+        public float? PaddingLeft { get; set; }
 
         public Text CreateText()
         {
