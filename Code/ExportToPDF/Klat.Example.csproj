@@ -180,6 +180,11 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Pdf.aspx" />
+    <Content Include="Reports\Report1.aspx" />
+    <Content Include="Reports\Report2.aspx" />
+    <Content Include="Reports\Report3.aspx" />
+    <Content Include="Reports\Report4.aspx" />
+    <Content Include="Reports\Report5.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -217,12 +222,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="Reports\Report5.html" />
-    <Content Include="Reports\Report3.html" />
-    <Content Include="Reports\Report4.html" />
-    <Content Include="Reports\Report2.html" />
-    <Content Include="Reports\Report1.html" />
-    <Content Include="Reports\report.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -268,6 +267,41 @@
       <DependentUpon>Pdf.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Report1.aspx.cs">
+      <DependentUpon>Report1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report1.aspx.designer.cs">
+      <DependentUpon>Report1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report2.aspx.cs">
+      <DependentUpon>Report2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report2.aspx.designer.cs">
+      <DependentUpon>Report2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report3.aspx.cs">
+      <DependentUpon>Report3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report3.aspx.designer.cs">
+      <DependentUpon>Report3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report4.aspx.cs">
+      <DependentUpon>Report4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report4.aspx.designer.cs">
+      <DependentUpon>Report4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report5.aspx.cs">
+      <DependentUpon>Report5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report5.aspx.designer.cs">
+      <DependentUpon>Report5.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
