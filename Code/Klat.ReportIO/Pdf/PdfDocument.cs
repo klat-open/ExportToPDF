@@ -168,7 +168,15 @@ namespace Klat.ReportIO.Pdf
                                 }
                                 else
                                 {
-                                    tableCell.Value = cell.Text;
+                                    if (cell.IsRichText)
+                                    {
+                                        tableCell.Value = cell.Text;
+                                    }
+                                    else
+                                    {
+                                        tableCell.Value = cell.Text.Replace("\n", " ");
+                                    }
+
                                     if (font.Bold && font.Italic)
                                     {
                                         tableCell.Style = FontStyle.BoldItalic;
